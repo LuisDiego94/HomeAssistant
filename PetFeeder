@@ -1,0 +1,423 @@
+{
+    "modelId": "0000044f27",
+    "services":
+    [
+        {
+            "actions":
+            [],
+            "code": "",
+            "description": "",
+            "events":
+            [],
+            "name": "默认服务",
+            "properties":
+            [
+                {
+                    "abilityId": 1,
+                    "accessMode": "rw",
+                    "code": "meal_plan",
+                    "description": "同步到设备端本地，即使设备离线，仍能正常喂食出粮，喂食计划最多支持10个\nraw格式约定：按照“周期+时间+喂食份数+开关”来实现本地定时，具体如下\n1，前7个比特位代表周一到周日，二进制转十六进制，占用一个字节，0代表未设置，1代表设置，如0000001，表示周日生效，转换为16进制就是01\n2，时间按照小时分钟格式，占用2个字节，分钟和小时，十进制转16进制，如18：50，转为16进制为1232\n3，喂食份数，占用1个字节，十进制转16进制，如12，转为16进制为0c\n4，开关，占用1个字节，00表示关闭，01表示开启\n上述举例，对于APP端时间下发的结果为0112320c01，表示周日，18：50，喂食12份，开启。",
+                    "extensions":
+                    {
+                        "iconName": "icon-dp_time3",
+                        "attribute": "96"
+                    },
+                    "name": "喂食计划",
+                    "typeSpec":
+                    {
+                        "maxlen": 128,
+                        "type": "raw"
+                    }
+                },
+                {
+                    "abilityId": 3,
+                    "accessMode": "rw",
+                    "code": "manual_feed",
+                    "description": "",
+                    "extensions":
+                    {
+                        "iconName": "icon-icon-test13"
+                    },
+                    "name": "手动喂食",
+                    "typeSpec":
+                    {
+                        "max": 50,
+                        "min": 1,
+                        "scale": 0,
+                        "step": 1,
+                        "type": "value",
+                        "typeDefaultValue": 1,
+                        "unit": ""
+                    }
+                },
+                {
+                    "abilityId": 4,
+                    "accessMode": "ro",
+                    "code": "feed_state",
+                    "description": "0：正常状态\n1：余粮不足\n2：堵塞\n3：设备异常\n4：喂食中\n5：喂食完成",
+                    "extensions":
+                    {
+                        "iconName": "icon-zhuangtai"
+                    },
+                    "name": "喂食状态",
+                    "typeSpec":
+                    {
+                        "range":
+                        [
+                            "standby",
+                            "no_food",
+                            "error_ir",
+                            "feed_timeout",
+                            "feeding",
+                            "feed_end"
+                        ],
+                        "type": "enum",
+                        "typeDefaultValue": "standby"
+                    }
+                },
+                {
+                    "abilityId": 9,
+                    "accessMode": "rw",
+                    "code": "factory_reset",
+                    "description": "",
+                    "extensions":
+                    {
+                        "iconName": "icon-a_nav_mode",
+                        "attribute": "96"
+                    },
+                    "name": "恢复出厂",
+                    "typeSpec":
+                    {
+                        "type": "bool",
+                        "typeDefaultValue": false
+                    }
+                },
+                {
+                    "abilityId": 11,
+                    "accessMode": "ro",
+                    "code": "battery_percentage",
+                    "description": "",
+                    "extensions":
+                    {
+                        "iconName": "icon-dp_battery",
+                        "attribute": "1152"
+                    },
+                    "name": "电池电量",
+                    "typeSpec":
+                    {
+                        "max": 100,
+                        "min": 0,
+                        "scale": 0,
+                        "step": 1,
+                        "type": "value",
+                        "typeDefaultValue": 0,
+                        "unit": "%"
+                    }
+                },
+                {
+                    "abilityId": 14,
+                    "accessMode": "ro",
+                    "code": "fault",
+                    "description": "1:无粮\n2：堵粮\n3：设备异常\n4：电量低",
+                    "extensions":
+                    {
+                        "iconName": "icon-dp_notice",
+                        "scope": "fault",
+                        "trigger": "direct"
+                    },
+                    "name": "故障告警",
+                    "typeSpec":
+                    {
+                        "label":
+                        [
+                            "no_food",
+                            "error_ir",
+                            "feed_timeout",
+                            "battery_low"
+                        ],
+                        "maxlen": 4,
+                        "type": "bitmap",
+                        "typeDefaultValue": 0
+                    }
+                },
+                {
+                    "abilityId": 15,
+                    "accessMode": "ro",
+                    "code": "feed_report",
+                    "description": "",
+                    "extensions":
+                    {
+                        "attribute": "128",
+                        "trigger": "direct"
+                    },
+                    "name": "计划喂食结果上报",
+                    "typeSpec":
+                    {
+                        "max": 50,
+                        "min": 0,
+                        "scale": 0,
+                        "step": 1,
+                        "type": "value",
+                        "typeDefaultValue": 0,
+                        "unit": ""
+                    }
+                },
+                {
+                    "abilityId": 18,
+                    "accessMode": "rw",
+                    "code": "voice_times",
+                    "description": "0-不播放声音",
+                    "extensions":
+                    {
+                        "iconName": "icon-dp_0",
+                        "attribute": "1248"
+                    },
+                    "name": "语音播放次数",
+                    "typeSpec":
+                    {
+                        "max": 10,
+                        "min": 0,
+                        "scale": 0,
+                        "step": 1,
+                        "type": "value",
+                        "typeDefaultValue": 0,
+                        "unit": ""
+                    }
+                },
+                {
+                    "abilityId": 101,
+                    "accessMode": "ro",
+                    "code": "power_mode",
+                    "description": "",
+                    "extensions":
+                    {
+                        "iconName": "icon-dp_mode",
+                        "attribute": "4096"
+                    },
+                    "name": "供电模式",
+                    "typeSpec":
+                    {
+                        "range":
+                        [
+                            "strong_power",
+                            "battery_power"
+                        ],
+                        "type": "enum",
+                        "typeDefaultValue": "strong_power"
+                    }
+                },
+                {
+                    "abilityId": 102,
+                    "accessMode": "rw",
+                    "code": "record_set",
+                    "description": "player             播放一次录音\ndel                   删除录音\nrecord_start    app下发开始录音\nrecord_stop    app下发停止录音",
+                    "name": "录音设置",
+                    "typeSpec":
+                    {
+                        "range":
+                        [
+                            "player",
+                            "del",
+                            "record_start",
+                            "record_stop"
+                        ],
+                        "type": "enum",
+                        "typeDefaultValue": "player"
+                    }
+                },
+                {
+                    "abilityId": 103,
+                    "accessMode": "ro",
+                    "code": "recording_exists",
+                    "description": "nv_voice      无录音\nhave_voice  有录音\n\n",
+                    "name": "是否有录音",
+                    "typeSpec":
+                    {
+                        "range":
+                        [
+                            "no_voice",
+                            "have_voice"
+                        ],
+                        "type": "enum",
+                        "typeDefaultValue": "no_voice"
+                    }
+                },
+                {
+                    "abilityId": 108,
+                    "accessMode": "ro",
+                    "code": "surplus_state",
+                    "description": "full   余粮充足\nlack  余粮不足",
+                    "name": "余粮状态",
+                    "typeSpec":
+                    {
+                        "range":
+                        [
+                            "full",
+                            "lack"
+                        ],
+                        "type": "enum",
+                        "typeDefaultValue": "full"
+                    }
+                },
+                {
+                    "abilityId": 109,
+                    "accessMode": "ro",
+                    "code": "record_state",
+                    "description": "",
+                    "extensions":
+                    {
+                        "trigger": "direct"
+                    },
+                    "name": "录音状态",
+                    "typeSpec":
+                    {
+                        "range":
+                        [
+                            "record_start",
+                            "record_end"
+                        ],
+                        "type": "enum",
+                        "typeDefaultValue": "record_start"
+                    }
+                },
+                {
+                    "abilityId": 110,
+                    "accessMode": "rw",
+                    "code": "record",
+                    "description": "无效，设置录音开始只能通过102指令",
+                    "name": "录音",
+                    "typeSpec":
+                    {
+                        "max": 10,
+                        "min": 0,
+                        "scale": 0,
+                        "step": 1,
+                        "type": "value",
+                        "typeDefaultValue": 0,
+                        "unit": "s"
+                    }
+                },
+                {
+                    "abilityId": 112,
+                    "accessMode": "rw",
+                    "code": "log",
+                    "description": "",
+                    "name": "日志",
+                    "typeSpec":
+                    {
+                        "type": "bool",
+                        "typeDefaultValue": false
+                    }
+                },
+                {
+                    "abilityId": 113,
+                    "accessMode": "rw",
+                    "code": "indicator",
+                    "description": "",
+                    "name": "指示灯",
+                    "typeSpec":
+                    {
+                        "type": "bool",
+                        "typeDefaultValue": false
+                    }
+                },
+                {
+                    "abilityId": 114,
+                    "accessMode": "ro",
+                    "code": "wifi_signal",
+                    "description": "",
+                    "name": "wifi 信号",
+                    "typeSpec":
+                    {
+                        "max": 0,
+                        "min": -255,
+                        "scale": 0,
+                        "step": 1,
+                        "type": "value",
+                        "typeDefaultValue": -255,
+                        "unit": ""
+                    }
+                },
+                {
+                    "abilityId": 115,
+                    "accessMode": "ro",
+                    "code": "plan_feed_report",
+                    "description": "",
+                    "extensions":
+                    {
+                        "trigger": "direct"
+                    },
+                    "name": "手动喂食结果上报",
+                    "typeSpec":
+                    {
+                        "max": 50,
+                        "min": 0,
+                        "scale": 0,
+                        "step": 1,
+                        "type": "value",
+                        "typeDefaultValue": 0,
+                        "unit": ""
+                    }
+                },
+                {
+                    "abilityId": 116,
+                    "accessMode": "ro",
+                    "code": "voice_name",
+                    "description": "",
+                    "name": "录音文件名字",
+                    "typeSpec":
+                    {
+                        "maxlen": 255,
+                        "type": "string",
+                        "typeDefaultValue": ""
+                    }
+                },
+                {
+                    "abilityId": 117,
+                    "accessMode": "ro",
+                    "code": "wifi_off",
+                    "description": "电池供电时，关闭WiFi模块前上报状态",
+                    "name": "关闭WiFi",
+                    "typeSpec":
+                    {
+                        "type": "bool",
+                        "typeDefaultValue": false
+                    }
+                },
+                {
+                    "abilityId": 118,
+                    "accessMode": "ro",
+                    "code": "offline_feed_record",
+                    "description": "dp需要做下修改，raw dp协议：\nyyyymmddHHMMSSAATTSU\n2021 11 16 15 50 30 01 01 00\n年 月 日 时 分 秒 份数 喂食类型\n\n设备连接上Wi-Fi后需要把缓存的数据统计在raw型dp一次上报完本次离线记录\n最多50条 \n01：计划喂食，02：手动喂食\n喂食结果（SU）：0: 成功\n1: 无粮\n2：堵粮\n3：设备异常",
+                    "name": "离线喂食记录",
+                    "typeSpec":
+                    {
+                        "maxlen": 128,
+                        "type": "raw"
+                    }
+                },
+                {
+                    "abilityId": 119,
+                    "accessMode": "ro",
+                    "code": "reset_wifi_cnt",
+                    "description": "记录WiFi异常后，设备重启WiFi次数",
+                    "extensions":
+                    {
+                        "trigger": "direct"
+                    },
+                    "name": "重启WiFi次数",
+                    "typeSpec":
+                    {
+                        "max": 5000,
+                        "min": 0,
+                        "scale": 0,
+                        "step": 1,
+                        "type": "value",
+                        "typeDefaultValue": 0,
+                        "unit": ""
+                    }
+                }
+            ]
+        }
+    ]
+}
